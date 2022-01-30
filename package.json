@@ -1,5 +1,5 @@
 {
-  "name": "@hulkfinance-libs/sdk",
+  "name": "@hulkfinance/hulk-swap-sdk",
   "license": "MIT",
   "version": "1.0.0",
   "description": "🛠 An SDK for building applications on top of hulkfinance.",
