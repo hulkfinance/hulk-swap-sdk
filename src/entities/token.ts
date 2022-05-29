@@ -1,7 +1,7 @@
 import invariant from 'tiny-invariant'
-import { ChainId } from '../constants'
-import { validateAndParseAddress } from '../utils'
-import { Currency } from './currency'
+import {ChainId} from '../constants'
+import {validateAndParseAddress} from '../utils'
+import {Currency} from './currency'
 
 /**
  * Represents an ERC20 token with a unique address and some metadata.
@@ -9,11 +9,13 @@ import { Currency } from './currency'
 export class Token extends Currency {
   public readonly chainId: ChainId
   public readonly address: string
+  public readonly projectLink?: string
 
-  public constructor(chainId: ChainId, address: string, decimals: number, symbol?: string, name?: string) {
+  public constructor(chainId: ChainId, address: string, decimals: number, symbol?: string, name?: string, projectLink?: string) {
     super(decimals, symbol, name)
     this.chainId = chainId
     this.address = validateAndParseAddress(address)
+    this.projectLink = projectLink
   }
 
   /**
@@ -56,19 +58,19 @@ export function currencyEquals(currencyA: Currency, currencyB: Currency): boolea
   }
 }
 
-export const WETH = {
+export const WETH: { [chainId in ChainId | number | string]: Token } = {
   [ChainId.MAINNET]: new Token(
-    ChainId.MAINNET,
-    '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
-    18,
-    'WBNB',
-    'Wrapped BNB'
+      ChainId.MAINNET,
+      '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
+      18,
+      'WBNB',
+      'Wrapped BNB'
   ),
   [ChainId.BSCTESTNET]: new Token(
-    ChainId.BSCTESTNET,
-    '0xaE8E19eFB41e7b96815649A6a60785e1fbA84C1e',
-    18,
-    'WBNB',
-    'Wrapped BNB'
+      ChainId.BSCTESTNET,
+      '0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd',
+      18,
+      'WBNB',
+      'Wrapped BNB'
   )
 }
